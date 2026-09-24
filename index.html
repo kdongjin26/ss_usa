@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>사회와 교실 1900–2020</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700;800&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F3F4F1; --surface:#FBFBF9; --ink:#1B2220; --ink-2:#48524E; --muted:#6D7773;
+  --line:#D6DAD4; --line-2:#E6E9E4;
+  --soc:#A4432B; --soc-soft:#F4E4DE; --edu:#27604F; --edu-soft:#DDEBE5;
+  --mark:#D9A42B; --shade:rgba(20,26,24,.86);
+  --f-display:'Hahmlet','Noto Serif KR','Batang',serif;
+  --f-body:'IBM Plex Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif;
+  --f-mono:'IBM Plex Mono',Consolas,monospace;
+  --fs:16px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121615; --surface:#1A1F1D; --ink:#E7EAE5; --ink-2:#B9C1BC; --muted:#8C9690;
+    --line:#2F3733; --line-2:#252C29;
+    --soc:#E0826A; --soc-soft:#3A2520; --edu:#6DBA9E; --edu-soft:#1C332B;
+    --mark:#E6BA55; --shade:rgba(0,0,0,.9); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121615; --surface:#1A1F1D; --ink:#E7EAE5; --ink-2:#B9C1BC; --muted:#8C9690;
+  --line:#2F3733; --line-2:#252C29;
+  --soc:#E0826A; --soc-soft:#3A2520; --edu:#6DBA9E; --edu-soft:#1C332B;
+  --mark:#E6BA55; --shade:rgba(0,0,0,.9); color-scheme:dark;
+}
+:root.big{--fs:19px}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:var(--fs);line-height:1.7;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+[hidden]{display:none!important}
+
+/* ---------- top bar ---------- */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1320px;margin:0 auto;padding:10px 20px 0;display:grid;grid-template-columns:auto 1fr auto;gap:8px 20px;align-items:center}
+.brand{font-family:var(--f-display);font-weight:800;font-size:1.05rem;letter-spacing:-.01em;background:none;border:0;padding:0;text-align:left;white-space:nowrap}
+.brand small{display:block;font-family:var(--f-mono);font-weight:500;font-size:.68rem;letter-spacing:.08em;color:var(--muted)}
+.tools{display:flex;gap:6px}
+.tool{white-space:nowrap;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:4px 10px;font-size:.8rem;color:var(--ink-2)}
+.tool[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.nav{grid-column:1/-1;display:flex;gap:18px;overflow-x:auto;scrollbar-width:thin;padding-bottom:0}
+.nav-group{display:flex;flex-direction:column;gap:2px;flex:0 0 auto}
+.nav-label{font-size:.66rem;letter-spacing:.06em;color:var(--muted);white-space:nowrap}
+.nav-row{display:flex}
+.nav-btn{border:0;background:none;padding:4px 9px 9px;font-family:var(--f-mono);font-weight:600;font-size:.86rem;color:var(--ink-2);border-bottom:3px solid transparent;white-space:nowrap}
+.nav-btn:hover{color:var(--ink)}
+.nav-btn[aria-current="page"]{color:var(--ink);border-bottom-color:var(--mark)}
+
+main{max-width:1320px;margin:0 auto;padding-inline:20px;padding-block:28px 80px}
+
+/* ---------- overview ---------- */
+.ov-head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px;align-items:end;padding-block:12px 28px;border-bottom:2px solid var(--ink)}
+.ov-head h1{font-family:var(--f-display);font-weight:800;font-size:clamp(2rem,4.6vw,3.6rem);line-height:1.12;margin:0;letter-spacing:-.02em;text-wrap:balance}
+.ov-head h1 em{font-style:normal;color:var(--soc)}
+.ov-head h1 b{color:var(--edu)}
+.ov-head p{margin:0;color:var(--ink-2);max-width:34em}
+.legend{display:flex;gap:16px;margin-top:12px;font-size:.85rem}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot.s{background:var(--soc)} .dot.e{background:var(--edu)}
+
+.ledger{margin-top:8px}
+.phase-row{display:flex;gap:12px;align-items:baseline;padding:22px 0 8px;border-bottom:1px solid var(--line)}
+.phase-row .pn{font-family:var(--f-mono);font-size:.75rem;color:var(--mark);font-weight:600}
+.phase-row h2{margin:0;font-size:1rem;font-weight:700}
+.phase-row .pr{font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+.lrow{display:grid;grid-template-columns:88px minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr);gap:18px;padding:14px 8px;border-bottom:1px solid var(--line-2);background:none;border-left:0;border-right:0;border-top:0;width:100%;text-align:left;align-items:start;border-radius:0}
+.lrow:hover{background:var(--surface)}
+.lrow .yr{font-family:var(--f-mono);font-weight:600;font-size:1.05rem}
+.lrow .tt{font-family:var(--f-display);font-weight:700;font-size:1.08rem;line-height:1.4}
+.lrow .c{font-size:.88rem;color:var(--ink-2);line-height:1.55;padding-left:12px;border-left:3px solid}
+.lrow .c.s{border-color:var(--soc)} .lrow .c.e{border-color:var(--edu)}
+
+/* ---------- era ---------- */
+.era-top{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 28px;align-items:end;padding-bottom:22px;border-bottom:2px solid var(--ink)}
+.era-num{font-family:var(--f-display);font-weight:800;font-size:clamp(4rem,11vw,8.5rem);line-height:.82;letter-spacing:-.04em;grid-row:span 2}
+.era-num span{color:var(--mark)}
+.era-phase{font-family:var(--f-mono);font-size:.78rem;color:var(--muted);letter-spacing:.04em}
+.era-title{font-family:var(--f-display);font-weight:700;font-size:clamp(1.6rem,3.3vw,2.5rem);line-height:1.2;margin:2px 0 0;text-wrap:balance;letter-spacing:-.015em}
+.era-lead{grid-column:1/-1;margin:14px 0 0;font-size:1.08em;color:var(--ink-2);max-width:48em}
+
+.tracks > *{min-width:0}
+.tracks{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;margin-top:26px}
+.track{padding:0 28px 8px}
+.track:first-child{padding-left:0;border-right:1px solid var(--line)}
+.track:last-child{padding-right:0}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:700;letter-spacing:.08em;padding:3px 10px;border-radius:3px}
+.track.s .tag{background:var(--soc-soft);color:var(--soc)}
+.track.e .tag{background:var(--edu-soft);color:var(--edu)}
+.track h3{font-family:var(--f-display);font-weight:700;font-size:1.45em;line-height:1.3;margin:10px 0 10px;text-wrap:balance}
+.track > ul{margin:0 0 22px;padding:0;list-style:none;display:grid;gap:8px}
+.track > ul > li{position:relative;padding-left:18px;max-width:40em}
+.track > ul > li::before{content:"";position:absolute;left:0;top:.72em;width:8px;height:2px}
+.track.s > ul > li::before{background:var(--soc)} .track.e > ul > li::before{background:var(--edu)}
+
+.src{border-top:1px solid var(--line);padding-top:16px;margin-top:16px;display:grid;gap:10px}
+.src-k{font-family:var(--f-mono);font-size:.72rem;font-weight:600;letter-spacing:.06em;color:var(--muted)}
+.track.s .src-k b{color:var(--soc)} .track.e .src-k b{color:var(--edu)}
+.src-img{position:relative;border:0;padding:0;background:var(--line-2);border-radius:4px;overflow:hidden;display:block;width:100%}
+.src-img img{width:100%;max-height:520px;object-fit:contain;background:#0f1211}
+.src-img .zoom{position:absolute;right:10px;bottom:10px;background:var(--shade);color:#fff;font-size:.74rem;padding:3px 9px;border-radius:3px}
+.src-thumb .src-img img{max-height:260px;background:var(--line-2)}
+.src h4{margin:0;font-size:1.05em;font-weight:700;line-height:1.4}
+.src .m{font-size:.84rem;color:var(--muted);margin-top:-6px}
+.src .n{margin:0;font-size:.93em;color:var(--ink-2)}
+.src blockquote{margin:0;font-family:var(--f-display);font-weight:500;font-size:1.12em;line-height:1.6;padding:6px 0 6px 16px;border-left:3px solid var(--mark)}
+.ask{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:10px 14px}
+.ask-h{font-size:.74rem;font-weight:700;letter-spacing:.08em;color:var(--mark)}
+.ask ol{margin:4px 0 0;padding-left:1.2em;font-size:.93em}
+.credit{font-size:.72rem;color:var(--muted);line-height:1.5}
+.qcard{background:var(--edu-soft);border-radius:4px;padding:26px 24px}
+.qcard blockquote{border:0;padding:0;font-size:1.35em;line-height:1.55;color:var(--ink)}
+.qcard .by{margin-top:14px;font-family:var(--f-mono);font-size:.8rem;color:var(--edu)}
+.more{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+
+/* C3 diagram */
+.c3{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:18px}
+.c3-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;counter-reset:d}
+.c3-step{position:relative;border-top:4px solid var(--edu);padding:10px 4px 4px}
+.c3-step .d{font-family:var(--f-mono);font-size:.72rem;color:var(--edu);font-weight:600}
+.c3-step b{display:block;font-size:.95em;line-height:1.35;margin-top:2px}
+.c3-step small{display:block;color:var(--muted);font-size:.78rem;line-height:1.45;margin-top:4px}
+.more .c3-row{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:14px}
+.c3-arc{margin-top:12px;font-size:.8rem;color:var(--ink-2);display:flex;align-items:center;gap:8px}
+.c3-arc::before{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--edu),var(--mark))}
+.c3-arc::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--mark),var(--edu))}
+
+/* bridge + wrap */
+.bridge{margin-top:30px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:center;padding:18px 22px;background:var(--ink);color:var(--bg);border-radius:4px}
+.bridge .ar{font-family:var(--f-mono);font-size:.8rem;white-space:nowrap}
+.bridge .ar i{font-style:normal;color:var(--soc-soft)} .bridge .ar u{text-decoration:none;color:var(--edu-soft)}
+.bridge p{margin:0;font-family:var(--f-display);font-weight:500;font-size:1.15em;line-height:1.5}
+.wrap{margin-top:18px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:18px}
+.qbox{border:2px solid var(--mark);border-radius:4px;padding:16px 20px}
+.qbox .h{font-size:.74rem;font-weight:700;letter-spacing:.08em;color:var(--mark)}
+.qbox p{margin:4px 0 0;font-size:1.1em;font-weight:600;line-height:1.55}
+.side{display:grid;gap:12px;align-content:start}
+.terms{display:flex;flex-wrap:wrap;gap:6px}
+.terms span{font-size:.8rem;border:1px solid var(--line);border-radius:20px;padding:2px 10px;background:var(--surface)}
+.timebtn{justify-self:start;border:1px dashed var(--line);background:none;border-radius:4px;padding:6px 12px;font-size:.82rem;color:var(--ink-2)}
+.timebtn:hover{border-color:var(--ink-2)}
+.pager{margin-top:36px;display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:16px}
+.pager button{background:none;border:0;padding:6px 0;text-align:left;max-width:48%}
+.pager button:last-child{text-align:right;margin-left:auto}
+.pager small{display:block;font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+.pager span{font-family:var(--f-display);font-weight:700}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:50;background:var(--shade);display:grid;grid-template-rows:auto minmax(0,1fr) auto;color:#EDEFEA}
+.lb-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px}
+.lb-top b{font-weight:600;font-size:.95rem}
+.lb-top .btns{display:flex;gap:6px;flex:0 0 auto}
+.lb-top button{background:rgba(255,255,255,.12);border:0;border-radius:4px;padding:5px 12px;color:#fff;font-size:.85rem}
+.lb-stage{overflow:auto;display:flex;align-items:center;justify-content:center;padding:0 16px}
+.lb-stage img{max-width:100%;max-height:100%;object-fit:contain;cursor:zoom-in}
+.lb-stage.full{align-items:flex-start;justify-content:flex-start}
+.lb-stage.full img{max-width:none;max-height:none;cursor:zoom-out}
+.lb-cap{padding:10px 16px calc(12px + env(safe-area-inset-bottom,0px));font-size:.85rem;color:#C9CEC8;max-width:1000px}
+
+@media (max-width:900px){
+  .ov-head{grid-template-columns:1fr;gap:14px}
+  .lrow{grid-template-columns:64px minmax(0,1fr);gap:6px 12px}
+  .lrow .c{grid-column:2}
+  .tracks{grid-template-columns:1fr}
+  .track,.track:first-child,.track:last-child{padding:0;border-right:0}
+  .track.e{margin-top:34px;padding-top:26px;border-top:2px solid var(--line)}
+  .wrap{grid-template-columns:1fr}
+  .c3-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .era-top{grid-template-columns:1fr}
+  .era-num{grid-row:auto}
+}
+@media (max-width:520px){
+  .bar-in,main{padding-inline:16px}
+  .bridge{grid-template-columns:1fr;gap:6px}
+  .tools .tool.hide-sm{display:none}
+}
+@media (prefers-reduced-motion:no-preference){
+  .view{animation:rise .35s ease-out}
+  @keyframes rise{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="bar-in">
+    <button class="brand" id="home" type="button">사회와 교실<small>US SOCIETY &amp; SOCIAL STUDIES · 1900–2020</small></button>
+    <div></div>
+    <div class="tools">
+      <button class="tool hide-sm" id="big" type="button" aria-pressed="false" title="글자 크게">발표용 글자</button>
+      <button class="tool" id="theme" type="button" title="밝게/어둡게">테마</button>
+    </div>
+    <nav class="nav" id="nav" aria-label="시대"></nav>
+  </div>
+</header>
+<main id="main"></main>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="사료 크게 보기">
+  <div class="lb-top"><b id="lb-title"></b><div class="btns"><button id="lb-prev" type="button">이전</button><button id="lb-next" type="button">다음</button><button id="lb-zoom" type="button">원본 크기</button><button id="lb-close" type="button">닫기</button></div></div>
+  <div class="lb-stage" id="lb-stage"><img id="lb-img" alt=""></div>
+  <div class="lb-cap" id="lb-cap"></div>
+</div>
+
+<script src="config.js"></script>
+<script src="data.js"></script>
+<script>
+(function(){
+  const E = window.ERAS, P = window.PHASES;
+  const $ = s => document.querySelector(s);
+  const main = $('#main'), nav = $('#nav');
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const phaseOf = id => P.find(p => p.id === id);
+
+  // nav
+  nav.innerHTML = P.map((p,i) => `<div class="nav-group"><span class="nav-label">${i+1}. ${esc(p.label)}</span><div class="nav-row">${
+    E.filter(e => e.phase === p.id).map(e => `<button class="nav-btn" type="button" data-go="${e.id}">${e.id}</button>`).join('')}</div></div>`).join('');
+  nav.addEventListener('click', ev => { const b = ev.target.closest('[data-go]'); if (b) go(b.dataset.go); });
+  $('#home').addEventListener('click', () => go('overview'));
+
+  function go(id){ if (location.hash.slice(1) !== id) location.hash = id; else render(); }
+  window.addEventListener('hashchange', render);
+
+  function overview(){
+    let h = `<section class="view"><div class="ov-head"><h1><em>사회</em>가 바뀌면<br><b>교실</b>은 무엇을 가르쳤나</h1>
+      <div><p>1900년대부터 2020년대까지 13개 시대를 따라, 미국 사회의 큰 변화와 그것이 학교 사회과에 남긴 흔적을 사료로 읽는다.</p>
+      <div class="legend"><span><i class="dot s"></i>사회 변화</span><span><i class="dot e"></i>교육 변화</span></div></div></div><div class="ledger">`;
+    P.forEach((p,i) => {
+      h += `<div class="phase-row"><span class="pn">${i+1}</span><h2>${esc(p.label)}</h2><span class="pr">${esc(p.range)}</span></div>`;
+      E.filter(e => e.phase === p.id).forEach(e => {
+        h += `<button class="lrow" type="button" data-go="${e.id}"><span class="yr">${e.id}</span><span class="tt">${esc(e.title)}</span><span class="c s">${esc(e.society.head)}</span><span class="c e">${esc(e.education.head)}</span></button>`;
+      });
+    });
+    main.innerHTML = h + '</div></section>';
+    main.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => go(b.dataset.go)));
+  }
+
+  function c3(){
+    const steps = [['1','질문 개발과 탐구 계획','핵심 질문과 보조 질문을 세운다'],['2','학문 개념과 도구 적용','공민·경제·지리·역사의 개념으로 분석한다'],['3','출처 평가와 증거 활용','사료를 비교하고 주장을 증거로 뒷받침한다'],['4','결론 전달과 실천','결론을 발표하고 정보에 근거해 행동한다']];
+    return `<div class="c3"><div class="c3-row">${steps.map(s => `<div class="c3-step"><span class="d">${s[0]}단계</span><b>${s[1]}</b><small>${s[2]}</small></div>`).join('')}</div><div class="c3-arc">탐구 아크(inquiry arc)</div></div>`;
+  }
+
+  function source(s, side, idx, eraId, main){
+    const key = `${eraId}|${side}|${idx}`;
+    let vis = '';
+    if (s.img) vis = `<button class="src-img" type="button" data-lb="${key}"><img src="${s.img}" alt="${esc(s.title)}" loading="lazy"><span class="zoom">크게 보기</span></button>`;
+    else if (s.diagram === 'c3') vis = c3();
+    else if (s.quoteCard) vis = `<div class="qcard"><blockquote>${esc(s.quote)}</blockquote><div class="by">${esc(s.title)} · ${esc(s.meta)}</div></div>`;
+    const q = (s.quote && !s.quoteCard) ? `<blockquote>${esc(s.quote)}</blockquote>` : '';
+    return `<figure class="src ${main ? '' : 'src-thumb'}" style="margin:0">
+      <div class="src-k"><b>${side === 's' ? '사회 사료' : '교육 사료'}${main ? '' : ' · 보조'}</b> · ${esc(s.kind)}</div>
+      ${vis}<h4>${esc(s.title)}</h4><div class="m">${esc(s.meta)}</div>${q}
+      <p class="n">${esc(s.note)}</p>
+      ${s.ask && s.ask.length ? `<div class="ask"><div class="ask-h">사료 읽기</div><ol>${s.ask.map(a => `<li>${esc(a)}</li>`).join('')}</ol></div>` : ''}
+      <figcaption class="credit">${esc(s.credit)}</figcaption></figure>`;
+  }
+
+  function track(e, side){
+    const t = side === 's' ? e.society : e.education;
+    const [first, ...rest] = t.sources;
+    return `<section class="track ${side}"><span class="tag">${side === 's' ? '사회 변화' : '교육 변화'}</span>
+      <h3>${esc(t.head)}</h3><ul>${t.body.map(b => `<li>${esc(b)}</li>`).join('')}</ul>
+      ${source(first, side, 0, e.id, true)}
+      ${rest.length ? `<div class="more" style="margin-top:8px">${rest.map((s,i) => source(s, side, i+1, e.id, false)).join('')}</div>` : ''}
+    </section>`;
+  }
+
+  function era(id){
+    const i = E.findIndex(e => e.id === id), e = E[i], p = phaseOf(e.phase), pi = P.indexOf(p) + 1;
+    const prev = E[i-1], next = E[i+1];
+    main.innerHTML = `<article class="view">
+      <div class="era-top"><div class="era-num">${e.id.slice(0,3)}<span>0s</span></div>
+        <div class="era-phase">${pi}. ${esc(p.label)} · ${i+1} / ${E.length}</div>
+        <h1 class="era-title">${esc(e.title)}</h1>
+        <p class="era-lead">${esc(e.lead)}</p></div>
+      <div class="tracks">${track(e,'s')}${track(e,'e')}</div>
+      <div class="bridge"><span class="ar"><i>사회</i> → <u>교실</u></span><p>${esc(e.bridge)}</p></div>
+      <div class="wrap"><div class="qbox"><div class="h">수업 질문</div><p>${esc(e.question)}</p></div>
+        <div class="side"><div class="terms">${e.terms.map(t => `<span>${esc(t)}</span>`).join('')}</div>
+        ${window.TIME_ENABLED ? `<button class="timebtn" type="button" data-time="${e.id}">보조 자료 · TIME 「America at 250」 ${e.id} 지면 보기</button>` : ''}</div></div>
+      <div class="pager">${prev ? `<button type="button" data-go="${prev.id}"><small>← ${prev.id}</small><span>${esc(prev.title)}</span></button>` : '<span></span>'}
+        ${next ? `<button type="button" data-go="${next.id}"><small>${next.id} →</small><span>${esc(next.title)}</span></button>` : ''}</div>
+    </article>`;
+    main.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => go(b.dataset.go)));
+    main.querySelectorAll('[data-lb]').forEach(b => b.addEventListener('click', () => openSources(b.dataset.lb)));
+    const tb = main.querySelector('[data-time]'); if (tb) tb.addEventListener('click', () => openTime(e));
+  }
+
+  function render(){
+    const id = location.hash.slice(1);
+    const known = E.some(e => e.id === id);
+    nav.querySelectorAll('.nav-btn').forEach(b => b.removeAttribute('aria-current'));
+    if (known){
+      const b = nav.querySelector(`[data-go="${id}"]`); b.setAttribute('aria-current','page');
+      b.scrollIntoView({block:'nearest', inline:'nearest'});
+      era(id);
+    } else overview();
+    window.scrollTo(0,0);
+  }
+
+  // lightbox
+  const lb = $('#lb'), lbImg = $('#lb-img'), stage = $('#lb-stage');
+  let set = [], cur = 0;
+  function show(){
+    const it = set[cur]; stage.classList.remove('full'); $('#lb-zoom').textContent = '원본 크기';
+    lbImg.src = it.src; lbImg.alt = it.title; $('#lb-title').textContent = it.title; $('#lb-cap').textContent = it.cap;
+    $('#lb-prev').hidden = $('#lb-next').hidden = set.length < 2;
+  }
+  function open(items, start){ set = items; cur = start; show(); lb.hidden = false; $('#lb-close').focus(); }
+  function openSources(key){
+    const [eid, side, idx] = key.split('|'), e = E.find(x => x.id === eid);
+    const items = [];
+    ['s','e'].forEach(sd => (sd === 's' ? e.society : e.education).sources.forEach((s,i) => {
+      if (s.img) items.push({key:`${eid}|${sd}|${i}`, src:s.img, title:`${sd === 's' ? '사회' : '교육'} 사료 · ${s.title}`, cap:`${s.meta} — ${s.credit}`});
+    }));
+    open(items, Math.max(0, items.findIndex(x => x.key === key)));
+  }
+  function openTime(e){
+    open(e.time.map((n,i) => ({src:`assets/time/${n}.jpg`, title:`TIME 「America at 250」 · ${e.id} (${i+1}/${e.time.length})`, cap:'TIME 특별호 지면 촬영본 · 수업용 보조 자료. 원본 크기로 보면 본문을 읽을 수 있다.'})), 0);
+  }
+  const close = () => { lb.hidden = true; lbImg.removeAttribute('src'); };
+  $('#lb-close').addEventListener('click', close);
+  $('#lb-prev').addEventListener('click', () => { cur = (cur - 1 + set.length) % set.length; show(); });
+  $('#lb-next').addEventListener('click', () => { cur = (cur + 1) % set.length; show(); });
+  const zoom = () => { const f = stage.classList.toggle('full'); $('#lb-zoom').textContent = f ? '화면에 맞춤' : '원본 크기'; };
+  $('#lb-zoom').addEventListener('click', zoom);
+  lbImg.addEventListener('click', zoom);
+  lb.addEventListener('click', ev => { if (ev.target === lb || ev.target === stage) close(); });
+
+  // keys: ← → 시대 이동, Esc 닫기
+  document.addEventListener('keydown', ev => {
+    if (!lb.hidden){
+      if (ev.key === 'Escape') close();
+      if (ev.key === 'ArrowLeft' && set.length > 1) $('#lb-prev').click();
+      if (ev.key === 'ArrowRight' && set.length > 1) $('#lb-next').click();
+      return;
+    }
+    if (ev.target.closest('input,textarea')) return;
+    const id = location.hash.slice(1), i = E.findIndex(e => e.id === id);
+    if (ev.key === 'ArrowRight') go(i < 0 ? E[0].id : (E[i+1] || E[i]).id);
+    if (ev.key === 'ArrowLeft') go(i <= 0 ? 'overview' : E[i-1].id);
+  });
+
+  // tools
+  const root = document.documentElement;
+  const pref = (k, v) => { try { v === undefined ? v = localStorage.getItem(k) : localStorage.setItem(k, v); } catch(_) {} return v; };
+  if (pref('big') === '1'){ root.classList.add('big'); $('#big').setAttribute('aria-pressed','true'); }
+  const th = pref('theme'); if (th) root.dataset.theme = th;
+  $('#big').addEventListener('click', () => { const on = root.classList.toggle('big'); $('#big').setAttribute('aria-pressed', on); pref('big', on ? '1' : '0'); });
+  $('#theme').addEventListener('click', () => {
+    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme = dark ? 'light' : 'dark'; pref('theme', root.dataset.theme);
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
